@@ -26,6 +26,7 @@ To add a sensor to the RMP, you have to enter the values of the sensor in the co
 |Unit Symbol   |The symbol the unit uses, like m                          |
 |default value |Value that is returned until a new real value is obtained |
 
+
 ## Endpoints
 
 Path elements preceded by ``:`` are variable names
@@ -40,8 +41,79 @@ Path elements preceded by ``:`` are variable names
 |PUT|/sensor/:thingName/:sensorName|Updates the specified sensor|
 |DELETE|/sensor/:thingName/:sensorName|Deletes the specified sensor|
 
+
 ### Examples
 
 ![GET /rmp/sensordata/:thingName/:sensorName](screenshots/RMP_getValue.png)
 
 ![GET /sensor/:thingName/:sensorName](screenshots/RMP_getValue.png)
+
+
+## POST/PUT Parameter Bodies
+
+### POST /value
+
+|Field|Meaning|Required|
+|---|---|---|
+|sensorName|Name of the sensor|yes|
+|thingName| Name of the thing|yes|
+|value|The new value of the sensor|yes|
+|timeStamp|The timestamp of the reading|no|
+|quality|The quality of the sensor value|yes|
+
+#### Example
+
+~~~~
+{
+  "sensorName": "sensor1",
+  "thingName": "thing1",
+  "value": "200",
+  "quality": 95
+}
+~~~~
+
+### POST /sensor
+
+|Field|Meaning|Required|
+|---|---|---|
+|sensorName|Name of the sensor|yes|
+|objectName|Name of the thing|yes|
+|sensorUrl|URL, the sensor is located at|yes|
+|sensorType|Type of the sensor, eg. temperature sensor|yes|
+|timeStamp|Timestamp, when the sensor was added|no|
+|quality|The quality of the sensor|yes|
+|unit|The name of the unit, the sensor measures, eg. meters|yes|
+|unitSymbol|The symbol the unit uses, eg. m|yes|
+|defaultValue|Value of the sensor until a new value comes|no|
+
+~~~~
+{
+  "sensorName": "sensor1",
+  "objectName": "thing1",
+  "sensorUrl": "1.3.3.7",
+  "sensorType": "Temperature",
+  "quality": 70,
+  "unit": "Degree Celcius",
+  "unitSymbol": "°C"
+}
+~~~~
+
+### PUT /sensor/:thingName/:sensorName
+
+|Field|Meaning|Required|
+|---|---|---|
+|sensorUrl|URL, the sensor is located at|no|
+|sensorType|Type of the sensor, eg. temperature sensor|no|
+|timeStamp|Timestamp, when the sensor was updated|no|
+|quality|Quality of the sensor|no|
+|unit|The name of the unit, the sensor measures, eg. meters|no|
+|unitSymbol|The symbol the unit uses, eg. m|no|
+|defaultValue|Value of the sensor until a new value comes|no|
+
+#### Example
+
+~~~~
+{
+  "defaultValue": "10"
+}
+~~~~
