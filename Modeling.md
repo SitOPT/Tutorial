@@ -41,7 +41,7 @@ This Situation is calculated the following way:
  - Get the value of s1
  - Check if value of s1 > 50
  - Get the value of s2
- - Check if value of s2 = 20
+ - Check if value of s2 = 200
  - Combine the results of the two comparisons with the AND operator
  
 ![Modeling example](screenshots/Modeling_example.png)
